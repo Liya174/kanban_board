@@ -1,0 +1,19 @@
+.footer {
+    background-color: #0067a3;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tasks {
+    padding-right: 36px;
+}
+.tasks.finished {
+    margin-right: auto;
+}

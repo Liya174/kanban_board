@@ -6,8 +6,6 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
 
-localStorage.removeItem("kanbanState");
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -88,7 +86,7 @@ class App extends React.Component {
                       },
                       ...this.state.allTasks.slice(tasksId + 1),
                   ];
-
+        localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
         this.setState({ allTasks: newAllTasks });
     };
 

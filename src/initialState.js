@@ -1,27 +1,29 @@
+const allTasksLocal = JSON.parse(localStorage.getItem("allTasksLocal"));
+
 export const initialState = {
     allTasks: [
         {
             id: 0,
             name: "Backlog",
-            issues: localStorage.getItem("backlogIssues") || [],
+            issues: allTasksLocal ? allTasksLocal[0].issues : [],
             isAbbButtonClicked: false,
         },
         {
             id: 1,
             name: "Ready",
-            issues: localStorage.getItem("readyIssues") || [],
+            issues: allTasksLocal ? allTasksLocal[1].issues : [],
             isAbbButtonClicked: false,
         },
         {
             id: 2,
             name: "In progress",
-            issues: localStorage.getItem("inProgressIssues") || [],
+            issues: allTasksLocal ? allTasksLocal[2].issues : [],
             isAbbButtonClicked: false,
         },
         {
             id: 3,
             name: "Finished",
-            issues: localStorage.getItem("finishedIssues") || [],
+            issues: allTasksLocal ? allTasksLocal[3].issues : [],
             isAbbButtonClicked: false,
         },
     ],

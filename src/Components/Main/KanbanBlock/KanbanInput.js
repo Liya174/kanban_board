@@ -2,14 +2,13 @@ import style from "./KanbanBlock.module.css";
 import arrowDropDown from "../../../img/arrow-drop-down.svg";
 import { useState } from "react";
 
-const KanbanInput = (props) => {
-    const { newIssueValue, prevTask, setNewIssueValue } = props;
+const KanbanDropdownInput = (props) => {
+    const { newIssueValue, prevTask, addNewTasksIssue, tasksId } = props;
 
     const [isListOpened, setIsListOpened] = useState(false); // changed when first line is clicked
 
-    //if not first column - make dropdown, if first(backlog) - input
     //dropdown made with <ul> & <li> tags
-    return prevTask ? (
+    return (
         <>
             <div className={style.item}>
                 <div
@@ -32,7 +31,7 @@ const KanbanInput = (props) => {
                                         : ""
                                 }`}
                                 onClick={() => {
-                                    setNewIssueValue(issue.title);
+                                    addNewTasksIssue(issue.title, tasksId);
                                     setIsListOpened(!isListOpened);
                                 }}
                             >
@@ -43,17 +42,10 @@ const KanbanInput = (props) => {
                 </div>
             )}
         </>
-    ) : (
-        <>
-            <div className={style.item}>
-                <input type="text" className={style.input} />
-            </div>
-            <button className={style.submit}>Submit</button>
-        </>
     );
 };
 
-export default KanbanInput;
+export default KanbanDropdownInput;
 
 /* //with datalist realisation
     <div className={`${style.item} ${style.datalist}`}>

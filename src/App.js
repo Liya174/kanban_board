@@ -24,13 +24,38 @@ class App extends React.Component {
         });
     }
 
+    //own methods
+    //after addButton clicked
     openInput = (tasksId) => {
-        console.log("block ", tasksId);
-        const currentTasks = this.state.allTasks.find(
-            (task) => task.id === tasksId
-        ).name;
+        const allTasksArray = this.state.allTasks;
+        const newAllTasks = [
+            ...allTasksArray.slice(0, tasksId),
+            { ...allTasksArray[tasksId], isAbbButtonClicked: true },
+            ...allTasksArray.slice(tasksId + 1),
+        ];
+        this.setState({ allTasks: newAllTasks });
+    };
 
-        console.log(currentTasks);
+    //after Submit clicked: push new backlog-issue, set isAddButtonClicked: false
+    addNewTasksIssue = (newIssueTitle, tasksId) => {
+        const tasksLastIssue = this.state.allTasks[tasksId].issues.slice();
+        const tasksLastId = tasksLastIssue[tasksLastIssue.length - 1].id;
+        const newIssue = {
+            id: tasksLastId + 1,
+            title: newIssueTitle,
+        };
+
+        const newAllTasks = [
+            ...this.state.allTasks.slice(0, tasksId),
+            {
+                ...this.state.allTasks[tasksId],
+                isAbbButtonClicked: false,
+                issues: [...this.state.allTasks[tasksId].issues, newIssue],
+            },
+            ...this.state.allTasks.slice(tasksId + 1),
+        ];
+
+        this.setState({ allTasks: newAllTasks });
     };
 
     //render
@@ -42,6 +67,7 @@ class App extends React.Component {
                 <Main
                     allTasks={this.state.allTasks}
                     openInput={this.openInput}
+                    addNewTasksIssue={this.addNewTasksIssue}
                 />
                 <Footer
                     activeTasks={this.state.activeTasks}

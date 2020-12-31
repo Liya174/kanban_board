@@ -3,10 +3,7 @@ import style from "./Main.module.css";
 import { useState } from "react";
 
 const Main = (props) => {
-    const { allTasks, openInput } = props;
-
-    //trying hooks
-    let [newIssueValue, setNewIssueValue] = useState("");
+    const { allTasks, openInput, addNewTasksIssue } = props;
 
     // for each 4 tasks (backlog, ready, inProgress & finished) make KanbanBlock. Send issues as children
     return (
@@ -20,8 +17,7 @@ const Main = (props) => {
                         isAbbButtonClicked={task.isAbbButtonClicked}
                         openInput={openInput}
                         prevTask={allTasks[index - 1] || undefined}
-                        newIssueValue={newIssueValue}
-                        setNewIssueValue={setNewIssueValue}
+                        addNewTasksIssue={addNewTasksIssue}
                     >
                         {task.issues.map((issue) => (
                             <div className={style.item} key={issue.id}>

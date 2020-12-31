@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 import style from "./KanbanBlock.module.css";
-import KanbanInput from "./KanbanInput";
 import KanbanButtons from "./KanbanButtons";
+import BacklogBlockInputAndButton from "./BacklogBlockInputAndButton";
+import KanbanDropdownInput from "./KanbanInput";
 
 const KanbanBlock = ({
     tasksId,
@@ -10,8 +11,7 @@ const KanbanBlock = ({
     prevTask,
     openInput,
     isAbbButtonClicked,
-    newIssueValue,
-    setNewIssueValue,
+    addNewTasksIssue,
     ...props
 }) => {
     //structure: issues-list, input for adding issue, add-button
@@ -28,20 +28,30 @@ const KanbanBlock = ({
                 <div className={style.blockInfoWithoutScroll}>
                     {React.Children.toArray(props.children)}
 
-                    {isAbbButtonClicked && (
-                        <KanbanInput
-                            prevTask={prevTask}
-                            newIssueValue={newIssueValue}
-                            setNewIssueValue={setNewIssueValue}
+                    {blockTitle === "Backlog" ? (
+                        <BacklogBlockInputAndButton
+                            addNewTasksIssue={addNewTasksIssue}
+                            isAbbButtonClicked={isAbbButtonClicked}
+                            openInput={openInput}
+                            tasksId={tasksId}
                         />
+                    ) : (
+                        <>
+                            {isAbbButtonClicked && (
+                                <KanbanDropdownInput
+                                    prevTask={prevTask}
+                                    addNewTasksIssue={addNewTasksIssue}
+                                    tasksId={tasksId}
+                                />
+                            )}
+                            <KanbanButtons
+                                isAbbButtonClicked={isAbbButtonClicked}
+                                prevTask={prevTask}
+                                openInput={openInput}
+                                tasksId={tasksId}
+                            />
+                        </>
                     )}
-
-                    <KanbanButtons
-                        isAbbButtonClicked={isAbbButtonClicked}
-                        prevTask={prevTask}
-                        openInput={openInput}
-                        tasksId={tasksId}
-                    />
                 </div>
             </div>
         </div>

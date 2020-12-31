@@ -40,20 +40,51 @@ class App extends React.Component {
     addNewTasksIssue = (newIssueTitle, tasksId) => {
         const tasksLastIssue = this.state.allTasks[tasksId].issues.slice();
         const tasksLastId = tasksLastIssue[tasksLastIssue.length - 1].id;
+        const newIssueInPrevTasksId =
+            tasksId !== 0 &&
+            this.state.allTasks[tasksId - 1].issues.find(
+                (issue) => issue.title === newIssueTitle
+            ).id;
+
+        console.log("newIssueInPrevTasksId: ", newIssueInPrevTasksId);
         const newIssue = {
             id: tasksLastId + 1,
             title: newIssueTitle,
         };
 
-        const newAllTasks = [
-            ...this.state.allTasks.slice(0, tasksId),
-            {
-                ...this.state.allTasks[tasksId],
-                isAbbButtonClicked: false,
-                issues: [...this.state.allTasks[tasksId].issues, newIssue],
-            },
-            ...this.state.allTasks.slice(tasksId + 1),
-        ];
+        const newAllTasks =
+            tasksId === 0
+                ? [
+                      {
+                          ...this.state.allTasks[tasksId],
+                          isAbbButtonClicked: false,
+                          issues: [
+                              ...this.state.allTasks[tasksId].issues,
+                              newIssue,
+                          ],
+                      },
+                      ...this.state.allTasks.slice(tasksId + 1),
+                  ]
+                : [
+                      ...this.state.allTasks.slice(0, tasksId - 1),
+                      {
+                          ...this.state.allTasks[tasksId - 1],
+                          issues: this.state.allTasks[
+                              tasksId - 1
+                          ].issues.filter(
+                              (issue) => issue.id !== newIssueInPrevTasksId
+                          ),
+                      },
+                      {
+                          ...this.state.allTasks[tasksId],
+                          isAbbButtonClicked: false,
+                          issues: [
+                              ...this.state.allTasks[tasksId].issues,
+                              newIssue,
+                          ],
+                      },
+                      ...this.state.allTasks.slice(tasksId + 1),
+                  ];
 
         this.setState({ allTasks: newAllTasks });
     };

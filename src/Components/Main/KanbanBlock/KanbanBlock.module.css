@@ -159,13 +159,14 @@
     width: 100px;
     height: 30px;
     border: 0;
-    background-color: none;
+    background: none;
     margin-top: 15px;
     padding: 0;
     color: #a5aebe;
 }
 .addButton.active {
     color: #5e6c84;
+    cursor: pointer;
 }
 .addButton.active:hover {
     cursor: pointer;

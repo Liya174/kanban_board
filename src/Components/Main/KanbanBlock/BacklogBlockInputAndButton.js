@@ -21,13 +21,21 @@ const BacklogBlockInputAndButton = ({
                             className={style.input}
                             value={newBacklogValue}
                             onChange={(e) => setNewBacklogValue(e.target.value)}
+                            onBlur={() => {
+                                if (newBacklogValue.trim()) {
+                                    addNewTasksIssue(newBacklogValue, tasksId);
+                                    setNewBacklogValue("");
+                                }
+                            }}
                         />
                     </div>
                     <button
                         className={style.submit}
                         onClick={() => {
-                            addNewTasksIssue(newBacklogValue, tasksId);
-                            setNewBacklogValue("");
+                            if (newBacklogValue.trim()) {
+                                addNewTasksIssue(newBacklogValue, tasksId);
+                                setNewBacklogValue("");
+                            }
                         }}
                     >
                         Submit

@@ -13,7 +13,7 @@ const KanbanButtons = (props) => {
                 className={`${style.addButton} ${
                     isPrevTaskFull && style.active
                 }`}
-                disabled={isAbbButtonClicked}
+                disabled={!isPrevTaskFull}
                 onClick={() => openInput(tasksId)}
             >
                 <img src={addCard} alt="+" className={style.addImage} />

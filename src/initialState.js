@@ -3,40 +3,25 @@ export const initialState = {
         {
             id: 0,
             name: "Backlog",
-            issues: [
-                { id: 0, title: "Login page – performance issues" },
-                { id: 1, title: "Sprint bugfix" },
-            ],
+            issues: localStorage.getItem("backlogIssues") || [],
             isAbbButtonClicked: false,
         },
         {
             id: 1,
             name: "Ready",
-            issues: [
-                { id: 0, title: "Shop page – performance issues" },
-                { id: 1, title: "Checkout bugfix" },
-                { id: 2, title: "Checkout bugfix" },
-                { id: 3, title: "Checkout bugfix" },
-                { id: 4, title: "Checkout bugfix" },
-            ],
+            issues: localStorage.getItem("readyIssues") || [],
             isAbbButtonClicked: false,
         },
         {
             id: 2,
             name: "In progress",
-            issues: [
-                { id: 0, title: "User page – performance issues" },
-                { id: 1, title: "Auth bugfix" },
-            ],
+            issues: localStorage.getItem("inProgressIssues") || [],
             isAbbButtonClicked: false,
         },
         {
             id: 3,
             name: "Finished",
-            issues: [
-                { id: 0, title: "Main page – performance issues" },
-                { id: 1, title: "Main page bugfix" },
-            ],
+            issues: localStorage.getItem("finishedIssues") || [],
             isAbbButtonClicked: false,
         },
     ],

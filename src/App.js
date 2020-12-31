@@ -6,6 +6,8 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
 
+localStorage.removeItem("kanbanState");
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -36,17 +38,18 @@ class App extends React.Component {
         this.setState({ allTasks: newAllTasks });
     };
 
-    //after Submit clicked: push new backlog-issue, set isAddButtonClicked: false
+    //the first task: after Submit clicked: push new issue in array, set isAddButtonClicked: false
+    //other: after dropdown-item clicked: push new issue in array, set isAddButtonClicked: false, delete this item from previous tasks
     addNewTasksIssue = (newIssueTitle, tasksId) => {
-        const tasksLastIssue = this.state.allTasks[tasksId].issues.slice();
-        const tasksLastId = tasksLastIssue[tasksLastIssue.length - 1].id;
+        const tasksIssues = this.state.allTasks[tasksId].issues.slice();
+        const tasksLength = tasksIssues.length;
+        const tasksLastId = tasksLength ? tasksIssues[tasksLength - 1].id : -1;
         const newIssueInPrevTasksId =
             tasksId !== 0 &&
             this.state.allTasks[tasksId - 1].issues.find(
                 (issue) => issue.title === newIssueTitle
             ).id;
 
-        console.log("newIssueInPrevTasksId: ", newIssueInPrevTasksId);
         const newIssue = {
             id: tasksLastId + 1,
             title: newIssueTitle,

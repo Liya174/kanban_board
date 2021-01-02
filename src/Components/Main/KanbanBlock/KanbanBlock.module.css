@@ -38,6 +38,7 @@
 }
 
 .item {
+    cursor: pointer;
     min-height: 35px;
     margin-top: 15px;
     padding: 7px 8px;

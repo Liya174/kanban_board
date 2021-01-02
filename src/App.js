@@ -90,12 +90,18 @@ class App extends React.Component {
         this.setState({ allTasks: newAllTasks });
     };
 
+    toggleMenuBlock = () => {
+        this.setState({ isMenuVisible: !this.state.isMenuVisible });
+    };
     //render
 
     render() {
         return (
             <div className="app">
-                <Header />
+                <Header
+                    isMenuVisible={this.state.isMenuVisible}
+                    toggleMenuBlock={this.toggleMenuBlock}
+                />
                 <Main
                     allTasks={this.state.allTasks}
                     openInput={this.openInput}

@@ -1,6 +1,5 @@
 import KanbanBlock from "./KanbanBlock/KanbanBlock";
 import style from "./Main.module.css";
-import { useState } from "react";
 
 const Main = (props) => {
     const { allTasks, openInput, addNewTasksIssue } = props;
@@ -12,9 +11,7 @@ const Main = (props) => {
                 {allTasks.map((task, index) => (
                     <KanbanBlock
                         key={task.id}
-                        blockTitle={task.name}
-                        tasksId={task.id}
-                        isAbbButtonClicked={task.isAbbButtonClicked}
+                        task={task}
                         openInput={openInput}
                         prevTask={allTasks[index - 1] || undefined}
                         addNewTasksIssue={addNewTasksIssue}

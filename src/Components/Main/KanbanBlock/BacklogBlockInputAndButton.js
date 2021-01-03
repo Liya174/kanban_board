@@ -21,8 +21,11 @@ const BacklogBlockInputAndButton = ({
                             className={style.input}
                             value={newBacklogValue}
                             onChange={(e) => setNewBacklogValue(e.target.value)}
-                            onBlur={() => {
-                                if (newBacklogValue.trim()) {
+                            onKeyDown={(e) => {
+                                if (
+                                    e.code === "Enter" &&
+                                    newBacklogValue.trim()
+                                ) {
                                     addNewTasksIssue(newBacklogValue, tasksId);
                                     setNewBacklogValue("");
                                 }

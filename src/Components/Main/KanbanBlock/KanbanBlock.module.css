@@ -14,6 +14,11 @@
     margin-right: 0;
 }
 
+.blockLink {
+    text-decoration: none;
+    color: #000000;
+}
+
 .blockInfo {
     max-height: calc(100vh - 164px);
     overflow-y: auto;
@@ -38,7 +43,6 @@
 }
 
 .item {
-    cursor: pointer;
     min-height: 35px;
     margin-top: 15px;
     padding: 7px 8px;

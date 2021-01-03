@@ -18,6 +18,9 @@
     align-items: center;
     cursor: pointer;
 }
+.titleLink {
+    text-decoration: none;
+}
 
 .userAvatar {
     background-color: #ffffff;

@@ -5,6 +5,8 @@ import { initialState } from "./initialState";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
+import TaskInfo from "./Components/TaskInfo/TaskInfo";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
     constructor(props) {
@@ -51,6 +53,8 @@ class App extends React.Component {
         const newIssue = {
             id: tasksLastId + 1,
             title: newIssueTitle,
+            body: "",
+            createTime: new Date().toLocaleString(),
         };
 
         const newAllTasks =
@@ -97,21 +101,36 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="app">
-                <Header
-                    isMenuVisible={this.state.isMenuVisible}
-                    toggleMenuBlock={this.toggleMenuBlock}
-                />
-                <Main
-                    allTasks={this.state.allTasks}
-                    openInput={this.openInput}
-                    addNewTasksIssue={this.addNewTasksIssue}
-                />
-                <Footer
-                    activeTasks={this.state.activeTasks}
-                    finishedTasks={this.state.finishedTasks}
-                />
-            </div>
+            <BrowserRouter>
+                <div className="app">
+                    <Header
+                        isMenuVisible={this.state.isMenuVisible}
+                        toggleMenuBlock={this.toggleMenuBlock}
+                    />
+                    <Switch>
+                        <Route
+                            path="/taskinfo"
+                            render={() => (
+                                <TaskInfo allTasks={this.state.allTasks} />
+                            )}
+                        />
+                        <Route
+                            path="/"
+                            render={() => (
+                                <Main
+                                    allTasks={this.state.allTasks}
+                                    openInput={this.openInput}
+                                    addNewTasksIssue={this.addNewTasksIssue}
+                                />
+                            )}
+                        />
+                    </Switch>
+                    <Footer
+                        activeTasks={this.state.activeTasks}
+                        finishedTasks={this.state.finishedTasks}
+                    />
+                </div>
+            </BrowserRouter>
         );
     }
 }

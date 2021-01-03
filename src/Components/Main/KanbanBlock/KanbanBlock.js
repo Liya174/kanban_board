@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 import style from "./KanbanBlock.module.css";
 import KanbanButtons from "./KanbanButtons";
@@ -6,49 +7,49 @@ import BacklogBlockInputAndButton from "./BacklogBlockInputAndButton";
 import KanbanDropdownInput from "./KanbanInput";
 
 const KanbanBlock = ({
-    tasksId,
-    blockTitle,
+    task,
     prevTask,
     openInput,
-    isAbbButtonClicked,
     addNewTasksIssue,
     ...props
 }) => {
     //structure: issues-list, input for adding issue, add-button
     return (
         <div
-            className={`${style.block} ${tasksId === 3 ? style.blockLast : ""}`}
+            className={`${style.block} ${task.id === 3 ? style.blockLast : ""}`}
         >
-            <p>{blockTitle}</p>
+            <Link className={style.blockLink} to={task.url}>
+                <p>{task.name}</p>
+            </Link>
             <div
                 className={`${style.blockInfo} ${
-                    isAbbButtonClicked && style.activeDropdown
+                    task.isAbbButtonClicked && style.activeDropdown
                 }`}
             >
                 <div className={style.blockInfoWithoutScroll}>
                     {React.Children.toArray(props.children)}
 
-                    {blockTitle === "Backlog" ? (
+                    {task.name === "Backlog" ? (
                         <BacklogBlockInputAndButton
                             addNewTasksIssue={addNewTasksIssue}
-                            isAbbButtonClicked={isAbbButtonClicked}
+                            isAbbButtonClicked={task.isAbbButtonClicked}
                             openInput={openInput}
-                            tasksId={tasksId}
+                            tasksId={task.id}
                         />
                     ) : (
                         <>
-                            {isAbbButtonClicked && (
+                            {task.isAbbButtonClicked && (
                                 <KanbanDropdownInput
                                     prevTask={prevTask}
                                     addNewTasksIssue={addNewTasksIssue}
-                                    tasksId={tasksId}
+                                    tasksId={task.id}
                                 />
                             )}
                             <KanbanButtons
-                                isAbbButtonClicked={isAbbButtonClicked}
+                                isAbbButtonClicked={task.isAbbButtonClicked}
                                 prevTask={prevTask}
                                 openInput={openInput}
-                                tasksId={tasksId}
+                                tasksId={task.id}
                             />
                         </>
                     )}

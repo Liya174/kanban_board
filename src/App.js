@@ -50,6 +50,14 @@ class App extends React.Component {
                 (issue) => issue.title === newIssueTitle
             ).id;
 
+        const newActiveTasks =
+            (tasksId === 0 && this.state.activeTasks + 1) ||
+            (tasksId === 1 && this.state.activeTasks - 1) ||
+            this.state.activeTasks;
+        const newFinishedTasks =
+            (tasksId === 3 && this.state.finishedTasks + 1) ||
+            this.state.finishedTasks;
+
         const newIssue = {
             id: tasksLastId + 1,
             title: newIssueTitle,
@@ -91,7 +99,11 @@ class App extends React.Component {
                       ...this.state.allTasks.slice(tasksId + 1),
                   ];
         localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
-        this.setState({ allTasks: newAllTasks });
+        this.setState({
+            allTasks: newAllTasks,
+            activeTasks: newActiveTasks || this.state.activeTasks,
+            finishedTasks: newFinishedTasks || this.state.finishedTasks,
+        });
     };
 
     toggleMenuBlock = () => {

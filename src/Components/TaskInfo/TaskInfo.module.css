@@ -72,3 +72,12 @@
     background: url("../../img/close-button.svg") no-repeat center/cover;
     border: 0;
 }
+
+@media (max-width: 600px) {
+    .taskContainer {
+        width: auto;
+        height: auto;
+        margin: 20px;
+        z-index: 20;
+    }
+}

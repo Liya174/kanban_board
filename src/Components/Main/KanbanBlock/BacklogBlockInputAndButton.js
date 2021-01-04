@@ -19,6 +19,7 @@ const BacklogBlockInputAndButton = ({
                         <input
                             type="text"
                             className={style.input}
+                            placeholder="Write new issue"
                             value={newBacklogValue}
                             onChange={(e) => setNewBacklogValue(e.target.value)}
                             onKeyDown={(e) => {

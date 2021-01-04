@@ -93,3 +93,22 @@
     text-decoration: none;
     color: #000000;
 }
+
+@media (max-width: 600px) {
+    .header {
+        background-color: #0079bf;
+    }
+    .headerContainer {
+        margin-top: 10px;
+        justify-content: flex-end;
+    }
+    .titleLink {
+        display: none;
+    }
+    .button {
+        background-color: #0079bf;
+    }
+    .listBlock {
+        z-index: 100;
+    }
+}

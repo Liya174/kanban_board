@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import style from "./KanbanBlock.module.css";
 import KanbanButtons from "./KanbanButtons";
 import BacklogBlockInputAndButton from "./BacklogBlockInputAndButton";
-import KanbanDropdownInput from "./KanbanInput";
+import KanbanDropdownInput from "./KanbanDropdownInput";
 
 const KanbanBlock = ({
     task,
@@ -21,11 +21,7 @@ const KanbanBlock = ({
             <Link className={style.blockLink} to={task.url}>
                 <p>{task.name}</p>
             </Link>
-            <div
-                className={`${style.blockInfo} ${
-                    task.isAbbButtonClicked && style.activeDropdown
-                }`}
-            >
+            <div className={style.blockInfo}>
                 <div className={style.blockInfoWithoutScroll}>
                     {React.Children.toArray(props.children)}
 
@@ -38,13 +34,6 @@ const KanbanBlock = ({
                         />
                     ) : (
                         <>
-                            {task.isAbbButtonClicked && (
-                                <KanbanDropdownInput
-                                    prevTask={prevTask}
-                                    addNewTasksIssue={addNewTasksIssue}
-                                    tasksId={task.id}
-                                />
-                            )}
                             <KanbanButtons
                                 isAbbButtonClicked={task.isAbbButtonClicked}
                                 prevTask={prevTask}
@@ -55,6 +44,13 @@ const KanbanBlock = ({
                     )}
                 </div>
             </div>
+            {task.isAbbButtonClicked && task.name !== "Backlog" && (
+                <KanbanDropdownInput
+                    prevTask={prevTask}
+                    addNewTasksIssue={addNewTasksIssue}
+                    tasksId={task.id}
+                />
+            )}
         </div>
     );
 };

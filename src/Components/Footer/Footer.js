@@ -9,7 +9,7 @@ const Footer = ({ activeTasks, finishedTasks }) => {
                     <p className={`${style.tasks} ${style.finished}`}>
                         Finished tasks: {finishedTasks}
                     </p>
-                    <p>Kanban board by Liia Kozlenko, 2020</p>
+                    <p>Kanban board by Liia Kozlenko, 2021</p>
                 </div>
             </div>
         </div>

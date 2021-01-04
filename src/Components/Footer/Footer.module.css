@@ -17,3 +17,9 @@
 .tasks.finished {
     margin-right: auto;
 }
+
+@media (max-width: 600px) {
+    .footer {
+        display: none;
+    }
+}

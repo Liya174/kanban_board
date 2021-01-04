@@ -29,3 +29,20 @@
 
     color: #ffffff;
 }
+
+@media (max-width: 650px) {
+    * {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    * {
+        font-size: 18px;
+    }
+    .app {
+        display: block;
+        min-height: 100vh;
+        height: auto;
+    }
+}

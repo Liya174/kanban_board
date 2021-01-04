@@ -15,7 +15,7 @@ const KanbanDropdownInput = (props) => {
                     className={style.dropdownFirstLine}
                     onClick={() => setIsListOpened(!isListOpened)}
                 >
-                    <span>{newIssueValue}</span>
+                    <span className={style.placeholder}>Choose issue</span>
                     <img src={arrowDropDown} alt="v" />
                 </div>
             </div>
@@ -46,23 +46,3 @@ const KanbanDropdownInput = (props) => {
 };
 
 export default KanbanDropdownInput;
-
-/* //with datalist realisation
-    <div className={`${style.item} ${style.datalist}`}>
-            <input
-            list="issues"
-            id="newIssues"
-            name="new issues"
-            className={style.firstDatalistString}
-        />
-        <datalist id="issues" className={style.dropdownList}>
-            {prevTask.issues.map((issue) => (
-                <option
-                    className={style.dropdownItem}
-                    key={issue.id}
-                    value={issue.title}
-                ></option>
-            ))}
-        </datalist> 
-        
-    </div>*/

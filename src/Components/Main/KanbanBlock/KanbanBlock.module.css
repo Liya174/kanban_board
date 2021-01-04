@@ -20,8 +20,10 @@
 }
 
 .blockInfo {
-    max-height: calc(100vh - 164px);
+    max-height: calc(100vh - 250px);
     overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .blockInfo::-webkit-scrollbar {
@@ -45,6 +47,7 @@
 .item {
     min-height: 35px;
     margin-top: 15px;
+    margin-right: 12px;
     padding: 7px 8px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -53,56 +56,22 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-.item.dropdownBlock {
-    padding: 0;
-}
 
 .input {
     border: none;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 }
-/*
-.datalist {
-    position: relative;
-}
-.datalist::before {
-    position: absolute;
-    content: url("../../../img/arrow-drop-down.svg");
-    top: 8px;
-    right: 8px;
-    z-index: 0;
-}
 
-.firstDatalistString {
-    width: 100%;
-    border: none;
-    cursor: pointer;
-}
-.firstDatalistString:hover {
-    background-color: crimson;
-}
-
-.dropdownList {
-    width: 100%;
-    font-weight: 600;
-    padding: 7px;
-    width: 100%;
-    list-style-type: none;
-}
-
-.dropdownItem {
-    font-weight: 600;
-    padding: 7px;
-    width: 100%;
-    list-style-type: none;
-} */
 .dropdownFirstLine {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 3px;
+}
+.placeholder {
+    color: rgb(145, 144, 144);
 }
 
 .dropdownListStart {
@@ -116,7 +85,7 @@
     padding-left: 0;
     margin-top: 3px;
     cursor: pointer;
-    width: 100%;
+    width: calc(100% - 12px);
     padding: 0;
     border: none;
     background-color: #ffffff;
@@ -127,6 +96,10 @@
     left: 0;
     right: 0;
     z-index: 100;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .dropdownItem {
@@ -181,4 +154,11 @@
 
 .addImage {
     margin-right: 3px;
+}
+@media (max-width: 600px) {
+    .block {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 50px;
+    }
 }

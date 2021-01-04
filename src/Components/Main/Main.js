@@ -2,7 +2,7 @@ import KanbanBlock from "./KanbanBlock/KanbanBlock";
 import style from "./Main.module.css";
 
 const Main = (props) => {
-    const { allTasks, openInput, addNewTasksIssue } = props;
+    const { allTasks, openInput, addNewTasksIssue, replaceTasksIssue } = props;
 
     // for each 4 tasks (backlog, ready, inProgress & finished) make KanbanBlock. Send issues as children
     return (
@@ -15,6 +15,7 @@ const Main = (props) => {
                         openInput={openInput}
                         prevTask={allTasks[index - 1] || undefined}
                         addNewTasksIssue={addNewTasksIssue}
+                        replaceTasksIssue={replaceTasksIssue}
                     >
                         {task.issues.map((issue) => (
                             <div className={style.item} key={issue.id}>

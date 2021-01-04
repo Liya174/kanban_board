@@ -3,7 +3,7 @@ import arrowDropDown from "../../../img/arrow-drop-down.svg";
 import { useState } from "react";
 
 const KanbanDropdownInput = (props) => {
-    const { newIssueValue, prevTask, addNewTasksIssue, tasksId } = props;
+    const { newIssueValue, prevTask, tasksId, replaceTasksIssue } = props;
 
     const [isListOpened, setIsListOpened] = useState(false); // changed when first line is clicked
 
@@ -31,7 +31,7 @@ const KanbanDropdownInput = (props) => {
                                         : ""
                                 }`}
                                 onClick={() => {
-                                    addNewTasksIssue(issue.title, tasksId);
+                                    replaceTasksIssue(issue.title, tasksId);
                                     setIsListOpened(!isListOpened);
                                 }}
                             >

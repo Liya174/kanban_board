@@ -11,6 +11,7 @@ const KanbanBlock = ({
     prevTask,
     openInput,
     addNewTasksIssue,
+    replaceTasksIssue,
     ...props
 }) => {
     //structure: issues-list, input for adding issue, add-button
@@ -47,7 +48,7 @@ const KanbanBlock = ({
             {task.isAbbButtonClicked && task.name !== "Backlog" && (
                 <KanbanDropdownInput
                     prevTask={prevTask}
-                    addNewTasksIssue={addNewTasksIssue}
+                    replaceTasksIssue={replaceTasksIssue}
                     tasksId={task.id}
                 />
             )}

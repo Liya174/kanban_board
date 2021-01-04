@@ -27,7 +27,7 @@ const BacklogBlockInputAndButton = ({
                                     e.code === "Enter" &&
                                     newBacklogValue.trim()
                                 ) {
-                                    addNewTasksIssue(newBacklogValue, tasksId);
+                                    addNewTasksIssue(newBacklogValue);
                                     setNewBacklogValue("");
                                 }
                             }}
@@ -37,7 +37,7 @@ const BacklogBlockInputAndButton = ({
                         className={style.submit}
                         onClick={() => {
                             if (newBacklogValue.trim()) {
-                                addNewTasksIssue(newBacklogValue, tasksId);
+                                addNewTasksIssue(newBacklogValue);
                                 setNewBacklogValue("");
                             }
                         }}

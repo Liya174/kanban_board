@@ -2,9 +2,12 @@ import style from "./KanbanBlock.module.css";
 import arrowDropDown from "../../../img/arrow-drop-down.svg";
 import { useState } from "react";
 
-const KanbanDropdownInput = (props) => {
-    const { newIssueValue, prevTask, tasksId, replaceTasksIssue } = props;
-
+const KanbanDropdownInput = ({
+    newIssueValue,
+    prevTask,
+    tasksId,
+    replaceTasksIssue,
+}) => {
     const [isListOpened, setIsListOpened] = useState(false); // changed when first line is clicked
 
     //dropdown made with <ul> & <li> tags

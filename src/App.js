@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { initialState } from "./initialState";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
 import TaskInfo from "./Components/TaskInfo/TaskInfo";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
     constructor(props) {
@@ -40,41 +40,44 @@ class App extends React.Component {
 
     //after dropdown-item clicked: push new issue in array, set isAddButtonClicked: false, delete this item from previous tasks
     replaceTasksIssue = (issueTitle, tasksId) => {
-        const tasksIssues = this.state.allTasks[tasksId].issues.slice();
+        const tasks = this.state.allTasks;
+        const tasksIssues = tasks[tasksId].issues.slice();
         const tasksLength = tasksIssues.length;
         const tasksLastId = tasksLength ? tasksIssues[tasksLength - 1].id : -1;
-        const issueInPrevTasks = this.state.allTasks[tasksId - 1].issues.find(
+        const issueInPrevTasks = tasks[tasksId - 1].issues.find(
             (issue) => issue.title === issueTitle
         );
-        const newActiveTasks =
-            (tasksId === 1 && this.state.activeTasks - 1) ||
-            this.state.activeTasks;
-        const newFinishedTasks =
-            (tasksId === 3 && this.state.finishedTasks + 1) ||
-            this.state.finishedTasks;
         const newAllTasks = [
-            ...this.state.allTasks.slice(0, tasksId - 1),
+            ...tasks.slice(0, tasksId - 1),
             {
-                ...this.state.allTasks[tasksId - 1],
-                issues: this.state.allTasks[tasksId - 1].issues.filter(
+                ...tasks[tasksId - 1],
+                issues: tasks[tasksId - 1].issues.filter(
                     (issue) => issue.id !== issueInPrevTasks.id
                 ),
             },
             {
-                ...this.state.allTasks[tasksId],
+                ...tasks[tasksId],
                 isAbbButtonClicked: false,
                 issues: [
-                    ...this.state.allTasks[tasksId].issues,
+                    ...tasks[tasksId].issues,
                     { ...issueInPrevTasks, id: tasksLastId + 1 },
                 ],
             },
-            ...this.state.allTasks.slice(tasksId + 1),
+            ...tasks.slice(tasksId + 1),
         ];
         localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
+
+        const newActiveTasks =
+            tasksId === 1 ? this.state.activeTasks - 1 : this.state.activeTasks;
+        const newFinishedTasks =
+            tasksId === 3
+                ? this.state.finishedTasks + 1
+                : this.state.finishedTasks;
+
         this.setState({
             allTasks: newAllTasks,
-            activeTasks: newActiveTasks || this.state.activeTasks,
-            finishedTasks: newFinishedTasks || this.state.finishedTasks,
+            activeTasks: newActiveTasks,
+            finishedTasks: newFinishedTasks,
         });
     };
 
@@ -114,6 +117,67 @@ class App extends React.Component {
     };
     //render
 
+    changeIssueBody = (bodyText, issueId, taskName) => {
+        const tasks = this.state.allTasks;
+
+        const currentTask = tasks
+            .slice()
+            .find((task) => task.name === taskName);
+        const currentTasksId = currentTask.id;
+
+        const newAllTasks = [
+            ...tasks.slice(0, currentTasksId),
+            {
+                ...tasks[currentTasksId],
+                issues: currentTask.issues.map((issue) =>
+                    issue.id === issueId ? { ...issue, body: bodyText } : issue
+                ),
+            },
+            ...tasks.slice(currentTasksId + 1),
+        ];
+
+        localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
+        this.setState({ allTasks: newAllTasks });
+    };
+
+    deleteIssue = (issueId, taskName) => {
+        console.log(issueId);
+        console.log(taskName);
+        const tasks = this.state.allTasks;
+
+        const currentTask = tasks
+            .slice()
+            .find((task) => task.name === taskName);
+        const currentTasksId = currentTask.id;
+
+        const newAllTasks = [
+            ...tasks.slice(0, currentTasksId),
+            {
+                ...tasks[currentTasksId],
+                issues: currentTask.issues.filter(
+                    (issue) => issue.id !== issueId
+                ),
+            },
+            ...tasks.slice(currentTasksId + 1),
+        ];
+
+        localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
+        const newActiveTasks =
+            currentTasksId === 0
+                ? this.state.activeTasks - 1
+                : this.state.activeTasks;
+        const newFinishedTasks =
+            currentTasksId === 3
+                ? this.state.finishedTasks - 1
+                : this.state.finishedTasks;
+
+        this.setState({
+            allTasks: newAllTasks,
+            activeTasks: newActiveTasks,
+            finishedTasks: newFinishedTasks,
+        });
+    };
+
     render() {
         return (
             <BrowserRouter>
@@ -126,7 +190,11 @@ class App extends React.Component {
                         <Route
                             path="/taskinfo"
                             render={() => (
-                                <TaskInfo allTasks={this.state.allTasks} />
+                                <TaskInfo
+                                    allTasks={this.state.allTasks}
+                                    changeIssueBody={this.changeIssueBody}
+                                    deleteIssue={this.deleteIssue}
+                                />
                             )}
                         />
                         <Route

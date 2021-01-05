@@ -12,8 +12,8 @@ const Main = (props) => {
                     <KanbanBlock
                         key={task.id}
                         task={task}
-                        openInput={openInput}
                         prevTask={allTasks[index - 1] || undefined}
+                        openInput={openInput}
                         addNewTasksIssue={addNewTasksIssue}
                         replaceTasksIssue={replaceTasksIssue}
                     >

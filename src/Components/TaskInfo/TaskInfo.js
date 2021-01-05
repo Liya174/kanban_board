@@ -1,19 +1,14 @@
 import style from "./TaskInfo.module.css";
 import { Link, withRouter } from "react-router-dom";
+import IssueInfo from "./IssueInfo";
 
-const IssueInfo = ({ issue }) => {
-    const { title, body, createTime } = issue;
-    return (
-        <div className={style.issueContainer}>
-            <h2 className={style.subtitle}>{title}</h2>
-            <div className={style.createTime}>Created: {createTime}</div>
-
-            <div className={style.issueBody}>{body}</div>
-        </div>
-    );
-};
-
-const TaskInfo = ({ allTasks, location, ...props }) => {
+const TaskInfo = ({
+    allTasks,
+    location,
+    changeIssueBody,
+    deleteIssue,
+    ...props
+}) => {
     const currentTask = allTasks.find((task) => task.url === location.pathname);
     if (currentTask) {
         return (
@@ -21,7 +16,13 @@ const TaskInfo = ({ allTasks, location, ...props }) => {
                 <div className={style.title}>{currentTask.name}</div>
                 <div className={style.issuesContainer}>
                     {currentTask.issues.map((issue) => (
-                        <IssueInfo issue={issue} key={issue.id} />
+                        <IssueInfo
+                            issue={issue}
+                            taskName={currentTask.name}
+                            key={issue.id}
+                            changeIssueBody={changeIssueBody}
+                            deleteIssue={deleteIssue}
+                        />
                     ))}
                 </div>
                 <Link className={style.closeButton} to="/"></Link>

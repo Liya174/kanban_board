@@ -10,7 +10,7 @@
     -o-border-radius: 10px;
 }
 
-.blockLast {
+.block:last-child {
     margin-right: 0;
 }
 

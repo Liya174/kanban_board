@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 
+import Menu from "./Menu";
 import style from "./Header.module.css";
+
 import userAvatar from "../../img/user-avatar.svg";
 import arrowDown from "../../img/arrow-down.svg";
-import Menu from "./Menu";
 
 const Header = ({ isMenuVisible, toggleMenuBlock }) => {
     return (

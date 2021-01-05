@@ -16,9 +16,7 @@ const KanbanBlock = ({
 }) => {
     //structure: issues-list, input for adding issue, add-button
     return (
-        <div
-            className={`${style.block} ${task.id === 3 ? style.blockLast : ""}`}
-        >
+        <div className={style.block}>
             <Link className={style.blockLink} to={task.url}>
                 <p>{task.name}</p>
             </Link>

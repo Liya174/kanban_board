@@ -7,6 +7,7 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
 import TaskInfo from "./Components/TaskInfo/TaskInfo";
+import { countTasks } from "./Components/common/countingTasks";
 
 class App extends React.Component {
     constructor(props) {
@@ -67,12 +68,18 @@ class App extends React.Component {
         ];
         localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
 
-        const newActiveTasks =
-            tasksId === 1 ? this.state.activeTasks - 1 : this.state.activeTasks;
-        const newFinishedTasks =
-            tasksId === 3
-                ? this.state.finishedTasks + 1
-                : this.state.finishedTasks;
+        const newActiveTasks = countTasks(
+            1,
+            tasksId,
+            this.state.activeTasks,
+            false
+        );
+        const newFinishedTasks = countTasks(
+            3,
+            tasksId,
+            this.state.finishedTasks,
+            true
+        );
 
         this.setState({
             allTasks: newAllTasks,
@@ -86,8 +93,6 @@ class App extends React.Component {
         const tasksIssues = this.state.allTasks[0].issues.slice();
         const tasksLength = tasksIssues.length;
         const tasksLastId = tasksLength ? tasksIssues[tasksLength - 1].id : -1;
-
-        const newActiveTasks = this.state.activeTasks + 1;
 
         const newIssue = {
             id: tasksLastId + 1,
@@ -108,7 +113,7 @@ class App extends React.Component {
         localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
         this.setState({
             allTasks: newAllTasks,
-            activeTasks: newActiveTasks || this.state.activeTasks,
+            activeTasks: this.state.activeTasks + 1,
         });
     };
 
@@ -162,15 +167,19 @@ class App extends React.Component {
         ];
 
         localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
-        const newActiveTasks =
-            currentTasksId === 0
-                ? this.state.activeTasks - 1
-                : this.state.activeTasks;
-        const newFinishedTasks =
-            currentTasksId === 3
-                ? this.state.finishedTasks - 1
-                : this.state.finishedTasks;
 
+        const newActiveTasks = countTasks(
+            0,
+            currentTasksId,
+            this.state.activeTasks,
+            false
+        );
+        const newFinishedTasks = countTasks(
+            3,
+            currentTasksId,
+            this.state.finishedTasks,
+            false
+        );
         this.setState({
             allTasks: newAllTasks,
             activeTasks: newActiveTasks,

@@ -3,11 +3,11 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { initialState } from "./initialState";
+import { countTasks } from "./common/countingTasks";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
 import TaskInfo from "./Components/TaskInfo/TaskInfo";
-import { countTasks } from "./Components/common/countingTasks";
 
 class App extends React.Component {
     constructor(props) {
@@ -30,11 +30,11 @@ class App extends React.Component {
     //own methods
     //after addButton clicked
     openInput = (tasksId) => {
-        const allTasksArray = this.state.allTasks;
+        const tasks = this.state.allTasks;
         const newAllTasks = [
-            ...allTasksArray.slice(0, tasksId),
-            { ...allTasksArray[tasksId], isAbbButtonClicked: true },
-            ...allTasksArray.slice(tasksId + 1),
+            ...tasks.slice(0, tasksId),
+            { ...tasks[tasksId], isAbbButtonClicked: true },
+            ...tasks.slice(tasksId + 1),
         ];
         this.setState({ allTasks: newAllTasks });
     };
@@ -90,7 +90,8 @@ class App extends React.Component {
 
     //the first task: after Submit clicked: push new issue in array, set isAddButtonClicked: false
     addNewTasksIssue = (newIssueTitle) => {
-        const tasksIssues = this.state.allTasks[0].issues.slice();
+        const tasks = this.state.allTasks;
+        const tasksIssues = tasks[0].issues.slice();
         const tasksLength = tasksIssues.length;
         const tasksLastId = tasksLength ? tasksIssues[tasksLength - 1].id : -1;
 
@@ -103,11 +104,11 @@ class App extends React.Component {
 
         const newAllTasks = [
             {
-                ...this.state.allTasks[0],
+                ...tasks[0],
                 isAbbButtonClicked: false,
-                issues: [...this.state.allTasks[0].issues, newIssue],
+                issues: [...tasks[0].issues, newIssue],
             },
-            ...this.state.allTasks.slice(1),
+            ...tasks.slice(1),
         ];
 
         localStorage.setItem("allTasksLocal", JSON.stringify(newAllTasks));
@@ -146,8 +147,6 @@ class App extends React.Component {
     };
 
     deleteIssue = (issueId, taskName) => {
-        console.log(issueId);
-        console.log(taskName);
         const tasks = this.state.allTasks;
 
         const currentTask = tasks

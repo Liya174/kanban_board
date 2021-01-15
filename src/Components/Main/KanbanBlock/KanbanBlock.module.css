@@ -30,7 +30,7 @@
     width: 12px;
 }
 .blockInfo::-webkit-scrollbar-track {
-    background-color: #ffffff; /* color of the tracking area */
+    background-color: none;
 }
 .blockInfo::-webkit-scrollbar-thumb {
     background-color: #cbcbcb;

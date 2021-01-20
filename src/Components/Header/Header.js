@@ -6,7 +6,7 @@ import style from "./Header.module.css";
 import userAvatar from "../../img/user-avatar.svg";
 import arrowDown from "../../img/arrow-down.svg";
 
-const Header = ({ isMenuVisible, toggleMenuBlock }) => {
+const Header = ({ isMenuVisible, toggleMenu }) => {
     return (
         <div className={style.header}>
             <div className="container">
@@ -18,7 +18,7 @@ const Header = ({ isMenuVisible, toggleMenuBlock }) => {
                     <div className={style.userMenu}>
                         <div
                             className={style.userMenuTitle}
-                            onClick={toggleMenuBlock}
+                            onClick={toggleMenu}
                         >
                             <img
                                 className={style.userAvatar}

@@ -1,6 +1,6 @@
 import style from "./Footer.module.css";
 
-const Footer = ({ activeTasks, finishedTasks }) => {
+const Footer = ({ allTasks, activeTasks, finishedTasks }) => {
     return (
         <div className={style.footer}>
             <div className="container">
